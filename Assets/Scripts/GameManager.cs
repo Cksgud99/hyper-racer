@@ -34,16 +34,30 @@ public class GameManager : MonoBehaviour
         }
     }
     
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+    
     private void Start()
     {
         // Road 오브젝트 풀 초기화
         InitializeRoadPool();
         
+        // 게임 시작
         StartGame();
     }
 
     private void Update()
     {
+        // 활성화 된 도로를 아래로 서서히 이동
         foreach (var activeRoad in _activeRoads)
         {
             activeRoad.transform.Translate(-Vector3.forward * Time.deltaTime);
@@ -90,6 +104,7 @@ public class GameManager : MonoBehaviour
             road.transform.position = position;
             road.SetActive(true);
             
+            // 활성화 된 길을 움직이기 위해 List에 저장
             _activeRoads.Add(road);
         }
 
@@ -98,6 +113,13 @@ public class GameManager : MonoBehaviour
             GameObject road = Instantiate(roadPrefab, position, Quaternion.identity);
             _activeRoads.Add(road);
         }
+    }
+
+    public void DestroyRoad(GameObject road)
+    {
+        road.SetActive(false);
+        _activeRoads.Remove(road);
+        _roadPool.Enqueue(road);
     }
     
     #endregion
