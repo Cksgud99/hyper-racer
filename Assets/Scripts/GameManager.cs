@@ -24,7 +24,9 @@ public class GameManager : MonoBehaviour
     // 도로 이동
     private List<GameObject> _activeRoads = new List<GameObject>();
     
-
+    // 상태
+    public enum State {Start,Play,End}
+    public State GameState { get; private set; } = State.Start;
     
     // Singleton
     private static GameManager _instance;
