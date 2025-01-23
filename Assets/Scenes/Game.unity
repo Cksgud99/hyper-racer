@@ -684,8 +684,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carPrefab: {fileID: 8014800922519288792, guid: 4b1b6b0a374652f47adebbb6a72b4704, type: 3}
+  roadPrefab: {fileID: 7136582537563240391, guid: 653a10f2622ca524fb117dc460f1ac85, type: 3}
   leftMoveButton: {fileID: 223585984}
   rightMoveButton: {fileID: 1872828366}
+  gasText: {fileID: 191180784}
 --- !u!4 &952148107
 Transform:
   m_ObjectHideFlags: 0
