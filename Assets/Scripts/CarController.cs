@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Move(float direction)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        transform.Translate(Vector3.right * direction * Time.deltaTime);
     }
 }
