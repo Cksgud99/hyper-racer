@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 public class RoadController : MonoBehaviour
 {
     [SerializeField] private GameObject[] gasObjects;
+    [SerializeField] private GameObject[] monsterObjects;
 
     private void OnEnable()
     {
@@ -14,6 +15,12 @@ public class RoadController : MonoBehaviour
         foreach (var gasObject in gasObjects)
         {
             gasObject.SetActive(false);
+        }
+
+        // 모든 몬스터 비활성화
+        foreach (var monsterObject in monsterObjects)
+        {
+            monsterObject.SetActive(false);
         }
     }
 
@@ -49,5 +56,20 @@ public class RoadController : MonoBehaviour
     {
         int index = Random.Range(0, gasObjects.Length);
         gasObjects[index].SetActive(true);
+    }
+
+    /// <summary>
+    /// 가스가 생성되지 않은 위치에 몬스터 생성
+    /// </summary>
+    public void SpawnMonsters()
+    {
+        for (int i = 0; i < gasObjects.Length; i++)
+        {
+            // 가스가 비활성화된 위치에만 몬스터 활성화
+            if (!gasObjects[i].activeSelf && i < monsterObjects.Length)
+            {
+                monsterObjects[i].SetActive(true);
+            }
+        }
     }
 }

@@ -727,6 +727,7 @@ MonoBehaviour:
   startPanelPrefab: {fileID: 994821752411493699, guid: aa3860d753dbc6b45aa98b8dff1fbbb3, type: 3}
   endPanelPrefab: {fileID: 994821752411493699, guid: e26b49461c266a540a5935cf061cf19e, type: 3}
   canvasTransform: {fileID: 663916679}
+  roadMoveSpeed: 5
 --- !u!4 &952148107
 Transform:
   m_ObjectHideFlags: 0

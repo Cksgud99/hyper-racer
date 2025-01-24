@@ -130,6 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42b63d6af124bc3428d0698f03d85708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gasEffectPrefab: {fileID: 4021103657954561961, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
+  monsterEffectPrefab: {fileID: 725748389856807714, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
   gas: 600
   moveSpeed: 5
 --- !u!65 &1692467389932452231

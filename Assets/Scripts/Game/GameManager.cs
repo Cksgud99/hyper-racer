@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     //Prefab
     [SerializeField] private GameObject carPrefab;
     [SerializeField] private GameObject roadPrefab;
+    [SerializeField] private GameObject gasEffectPrefab;
+    [SerializeField] private GameObject monsterEffectPrefab;
 
     //UI
     [SerializeField] private MoveButton leftMoveButton;
@@ -16,13 +18,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject startPanelPrefab;
     [SerializeField] private GameObject endPanelPrefab;
     [SerializeField] private Transform canvasTransform;
+    
 
+    // 도로
+    [SerializeField] public float roadMoveSpeed = 5f;
+    
     // 자동차
     private CarController _carController;
 
-    // 도로 오브젝트 풀
+    // 오브젝트 풀
     private Queue<GameObject> _roadPool = new Queue<GameObject>();
     private int _roadPoolSize = 3;
+    
+    private Queue<GameObject> gasEffectPool = new Queue<GameObject>();
+    private Queue<GameObject> monsterEffectPool = new Queue<GameObject>();
 
     // 도로 이동
     private List<GameObject> _activeRoads = new List<GameObject>();
@@ -94,7 +103,7 @@ public class GameManager : MonoBehaviour
                 // 활성화 된 도로를 아래로 서서히 이동
                 foreach (var activeRoad in _activeRoads)
                 {
-                    activeRoad.transform.Translate(-Vector3.forward * Time.deltaTime);
+                    activeRoad.transform.Translate(-Vector3.forward * (roadMoveSpeed * Time.deltaTime));
                 }
 
                 // Gas 정보 출력
@@ -204,11 +213,17 @@ public class GameManager : MonoBehaviour
         if (_roadIndex > 0 && _roadIndex % 2 == 0)
         {
             road.GetComponent<RoadController>().SpawnGas();
+            road.GetComponent<RoadController>().SpawnMonsters();
         }
 
         // 활성화 된 길을 움직이기 위해 List에 저장
         _activeRoads.Add(road);
         _roadIndex++;
+    }
+    
+    public void SetRoadSpeed(float newSpeed)
+    {
+        roadMoveSpeed = newSpeed;
     }
 
     public void DestroyRoad(GameObject road)
@@ -218,5 +233,11 @@ public class GameManager : MonoBehaviour
         _roadPool.Enqueue(road);
     }
 
+    #endregion
+    
+    #region 이펙트 생성 및 관리
+
+    // TODO: 이펙트 오브젝트 풀
+    
     #endregion
 }
