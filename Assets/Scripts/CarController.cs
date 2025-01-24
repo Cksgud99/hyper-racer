@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
-    [SerializeField] private int gas = 100;
+    [SerializeField] private int gas = 1000;
     [SerializeField] private float moveSpeed = 1f;
     
     public int Gas { get => gas; }      // Gas 정보
@@ -23,7 +23,8 @@ public class CarController : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         
-        // TODO: 게임종료
+        // 게임종료
+        GameManager.Instance.EndGame();
     }
     
     /// <summary>
@@ -46,7 +47,8 @@ public class CarController : MonoBehaviour
         {
             gas += 30;
             
-            // TODO: 가스 아이템 제거
+            // TODO: 가스 아이템 숨기기
+            other.gameObject.SetActive(false);
         }
     }
 }
