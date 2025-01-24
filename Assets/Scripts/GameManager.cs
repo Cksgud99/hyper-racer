@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     private List<GameObject> _activeRoads = new List<GameObject>();
 
     // 만들어지는 도로의 index
-    private int _roadIndex = 0;
+    private int _roadIndex;
 
     // 상태
     public enum State
@@ -74,6 +74,10 @@ public class GameManager : MonoBehaviour
     {
         // Road 오브젝트 풀 초기화
         InitializeRoadPool();
+        
+        // Left, Right Move Button에 자동차 컨트롤 기능 적용
+        leftMoveButton.OnMoveButtonDown += () => _carController.Move(-1f);
+        rightMoveButton.OnMoveButtonDown += () => _carController.Move(1f);
 
         GameState = State.Start;
 
@@ -105,16 +109,14 @@ public class GameManager : MonoBehaviour
 
     private void StartGame()
     {
+        _roadIndex = 0;
+        
         // 도로 생성
         SpawnRoad(Vector3.zero);
 
         // 자동차 생성
         _carController = Instantiate(carPrefab, new Vector3(0, 0, -3f), Quaternion.identity)
             .GetComponent<CarController>();
-
-        // Left, Right Move Button에 자동차 컨트롤 기능 적용
-        leftMoveButton.OnMoveButtonDown += () => _carController.Move(-1f);
-        rightMoveButton.OnMoveButtonDown += () => _carController.Move(1f);
 
         GameState = State.Play;
     }
@@ -132,6 +134,7 @@ public class GameManager : MonoBehaviour
         {
             activeRoad.SetActive(false);
         }
+        
 
         // 게임 오버 패널 표시
         ShowEndPanel();
@@ -186,6 +189,8 @@ public class GameManager : MonoBehaviour
     public void SpawnRoad(Vector3 position)
     {
         GameObject road;
+        
+        Debug.Log(_roadPool.Count);
 
         if (_roadPool.Count > 0)
         {
