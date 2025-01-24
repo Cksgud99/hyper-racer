@@ -66,8 +66,6 @@ public class GameManager : MonoBehaviour
         {
             _instance = this;
         }
-
-        Time.timeScale = 5f;
     }
 
     private void Start()
@@ -189,8 +187,6 @@ public class GameManager : MonoBehaviour
     public void SpawnRoad(Vector3 position)
     {
         GameObject road;
-        
-        Debug.Log(_roadPool.Count);
 
         if (_roadPool.Count > 0)
         {
