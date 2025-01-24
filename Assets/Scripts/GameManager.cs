@@ -56,6 +56,8 @@ public class GameManager : MonoBehaviour
         {
             _instance = this;
         }
+
+        Time.timeScale = 5f;
     }
     
     private void Start()

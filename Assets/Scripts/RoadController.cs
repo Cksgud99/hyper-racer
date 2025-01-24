@@ -1,12 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class RoadController : MonoBehaviour
 {
     [SerializeField] private GameObject[] gasObjects;
 
-    private void Start()
+    private void OnDisable()
     {
         // 모든 가스 아이템 비활성화
         foreach (var gasObject in gasObjects)
@@ -14,8 +17,8 @@ public class RoadController : MonoBehaviour
             gasObject.SetActive(false);
         }
     }
-    
-    
+
+
     /// <summary>
     /// 플레이어 차량이 도로에 진입하면 다음 도로를 생성
     /// </summary>
